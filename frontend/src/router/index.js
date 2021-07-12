@@ -1,29 +1,29 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import LoginComponent from '../components/Login';
-import RegisterComponent from '../components/Register';
-import HelloComponent from '../components/HelloWorld';
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Login from '../components/Login';
+import Register from '../components/Register';
+import Home from '../components/HelloWorld';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 export const router = new VueRouter({
-    mode: 'history',
-    routes: [
-      { path: '/', component: LoginComponent },
-      { path: '/home', component: HelloComponent },
-      { path: '/register', component: RegisterComponent },
-    ]
-  });
-  
-  router.beforeEach((to, from, next) => {
-    const loggedIn = localStorage.getItem("auth");
-    const isAuth = to.matched.some((record) => record.meta.requiresAuth);
-    const isHide = to.matched.some((record) => record.meta.hideForAuth);
-  
-    if (isAuth && !loggedIn) {
-      return next({ path: "/" });
-    } else if (isHide && loggedIn) {
-      return next({ path: "/home" });
-    }
+  mode: 'history',
+  routes: [
+    { path: '/', component: Login },
+    { path: '/login', component: Login },
+    { path: '/home', component: Home },
+    { path: '/register', component: Register }
+ ]
+});
+
+router.beforeEach((to, from, next) => {
+  const publicPages = ['/', '/register'];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = localStorage.getItem('user');
+
+  if (authRequired && !loggedIn) {
+    next('/');
+  } else {
     next();
-  });
+  }
+});

@@ -18,6 +18,7 @@ func SetMiddlewareJSON(next http.HandlerFunc) http.HandlerFunc {
 
 func SetMiddlewareAuthentication(next http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		enableCors(&w)
 		err := auth.TokenValid(r)
 		if err != nil {
 			responses.ERROR(w, http.StatusUnauthorized, errors.New("Unauthorized"))

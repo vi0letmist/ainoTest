@@ -15,7 +15,6 @@ export const API = {
             headers : headers,
             params : input
         }
-
         try {
             const response = await axios.get(BASE_URL + endPoint, config);
             return response;

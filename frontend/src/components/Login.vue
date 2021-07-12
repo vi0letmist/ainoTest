@@ -64,6 +64,7 @@ export default {
           if (res.error) {
             this.loading = false;
             this.message = res.error.toString();
+            
           }else{
             this.$router.push('/home');
           }

@@ -10,8 +10,8 @@ import '@/assets/css/main.css'
 Vue.config.productionTip = false
 
 new Vue({
-  store,
   router,
   vuetify,
+  store,
   render: h => h(App)
 }).$mount('#app')

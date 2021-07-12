@@ -6,6 +6,7 @@
         <a class="navbar-brand float-left" href="/home">
            ainosi
         </a>
+        <div v-if="!$route.path ==='/home'">
         <ul class="nav navbar-nav flex-row float-right padding-10">
           <li class="nav-item">
             <router-link class="nav-link pr-3" to="/login">Sign in</router-link>
@@ -14,6 +15,14 @@
             <router-link class="btn btn-outline-primary" to="/register">Sign up</router-link>
           </li>
         </ul>
+        </div>
+        <div v-else>
+          <ul class="nav navbar-nav flex-row float-right padding-10">
+              <li class="nav-item">
+                <v-btn @click.prevent="logOut" class="btn btn-danger">Logout</v-btn>
+              </li>
+          </ul>
+        </div>
       </div>
     </nav>
 
@@ -27,3 +36,16 @@
     </div>
   </div>
 </template>
+<script>
+  export default {
+    props: {
+      source: String,
+    },
+    methods: {
+      logOut() {
+        this.$store.dispatch('auth/logout');
+        this.$router.push('/');
+      }
+    }
+  }
+</script>

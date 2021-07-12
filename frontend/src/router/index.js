@@ -23,7 +23,7 @@ router.beforeEach((to, from, next) => {
 
   if (authRequired && !loggedIn) {
     next('/');
-  } else {
+  } else{
     next();
   }
 });

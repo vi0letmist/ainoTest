@@ -25,10 +25,5 @@
     created () {
       this.user = this.$store.state.auth.user.email;
     },
-    methods: {
-      handleLogin() {
-        console.log('test', this.$store.state.user);
-      },
-    }
   }
 </script>

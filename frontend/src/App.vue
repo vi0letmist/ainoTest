@@ -18,7 +18,7 @@
         </div>
         <div v-else>
           <ul class="nav navbar-nav flex-row float-right padding-10">
-              <li class="nav-item">
+              <li class="nav-item" v-if='this.showButton'>
                 <v-btn @click.prevent="logOut" class="btn btn-danger">Logout</v-btn>
               </li>
           </ul>
@@ -40,6 +40,21 @@
   export default {
     props: {
       source: String,
+    },
+    data() {
+      return {
+        showButton : false,
+      }
+    },
+    computed: {
+      loggedIn() {
+        return this.$store.state.auth.status.loggedIn;
+      },
+    },
+    watch:{
+      loggedIn(){
+        this.showButton = this.loggedIn
+      }
     },
     methods: {
       logOut() {
